@@ -16,8 +16,8 @@ export const getUsers = async (_req: Request, res: Response): Promise<void> => {
   res.status(result.status).json(result);
 };
 
-export const showUser = async (_req: Request, res: Response): Promise<void> => {
-  const result: FullMessage | ReturnMessage = await USER.show(1);
+export const showUser = async (req: Request, res: Response): Promise<void> => {
+  const result: FullMessage | ReturnMessage = await USER.show(req.params.id as unknown as number);
   res.status(result.status).json(result);
 };
 
@@ -26,13 +26,13 @@ export const updateUser = async (req: Request, res: Response): Promise<void> => 
   res.status(result.status).json(result);
 };
 
-export const deleteUser = async (_req: Request, res: Response): Promise<void> => {
-  const result: FullMessage | ReturnMessage = await USER.destroy(1);
+export const deleteUser = async (req: Request, res: Response): Promise<void> => {
+  const result: FullMessage | ReturnMessage = await USER.destroy(req.body.id);
   res.status(result.status).json(result);
 };
 
-export const authUser = async (_req: Request, res: Response): Promise<void> => {
-  const result = await USER.auth("test@gmail.com", "fakepassword");
+export const authUser = async (req: Request, res: Response): Promise<void> => {
+  const result = await USER.auth(req.body.email, req.body.password);
   if ("data" in result) {
     const userToken = jwt.sign(result.data, securityConfig.JWT_TOKEN as unknown as string);
     res.status(result.status).json({ ...result, userToken });

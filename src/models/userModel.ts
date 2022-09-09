@@ -25,7 +25,7 @@ class User {
   async index(): Promise<FullMessage | ReturnMessage> {
     try {
       const connection = await db.connect();
-      const query = "SELECT id, email, name, age, password from users";
+      const query = "SELECT id, email, name, age from users";
       const response = await connection.query(query);
       connection.release();
       return successWithData("Users Fetched", response.rows);
@@ -37,10 +37,14 @@ class User {
   async show(id: number): Promise<FullMessage | ReturnMessage> {
     try {
       const connection = await db.connect();
-      const query = `SELECT * FROM users WHERE id=($1)`;
+      const query = `SELECT id, email, name, age FROM users WHERE id=($1)`;
       const response = await connection.query(query, [id]);
       connection.release();
-      return successWithData("User Fetched", response.rows[0]);
+      if (response.rowCount) {
+        return successWithData("User Fetched", response.rows[0]);
+      } else {
+        return errorHandler("User not found");
+      }
     } catch (err) {
       return errorHandler((err as Error).message);
     }
@@ -62,10 +66,16 @@ class User {
   async destroy(id: number): Promise<FullMessage | ReturnMessage> {
     try {
       const connection = await db.connect();
-      const query = `DELETE FROM users WHERE id=$1 returning name`;
+      const query = "SELECT name FROM users WHERE id=$1";
       const response = await connection.query(query, [id]);
-      connection.release();
-      return successHandler(`User Deleted: ${response.rows[0].name}`);
+      if (response.rowCount) {
+        const userInfo = await connection.query("DELETE FROM users WHERE id=$1 returning name", [id]);
+        connection.release();
+        return successHandler(`User Deleted: ${userInfo.rows[0].name}`);
+      } else {
+        connection.release();
+        return errorHandler("User not exist");
+      }
     } catch (err) {
       return errorHandler((err as Error).message);
     }
@@ -81,7 +91,7 @@ class User {
         const userPassword = response.rows[0].password;
         const validPassword = bcrypt.compareSync(password, userPassword);
         if (validPassword) {
-          const userInfo = await connection.query(`SELECT * from users WHERE email=$1`, data);
+          const userInfo = await connection.query(`SELECT id, name, email, age from users WHERE email=$1`, data);
           connection.release();
           return successWithData(`User Authorized`, userInfo.rows[0]);
         } else {
