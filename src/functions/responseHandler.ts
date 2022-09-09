@@ -1,4 +1,4 @@
-import { UserModel } from "../models/types/UserModel";
+import { ReceivedUserModel, UserModel } from "../models/types/UserModel";
 import { FullMessage, ReturnMessage } from "./types/ResponseHandler";
 
 export const errorHandler = (msg: string, code?: number): ReturnMessage => {
@@ -11,7 +11,11 @@ export const successHandler = (msg: string, code?: number): ReturnMessage => {
   return { msg, status };
 };
 
-export const successWithData = (msg: string, data: UserModel | UserModel[], code?: number): FullMessage => {
+export const successWithData = (
+  msg: string,
+  data: ReceivedUserModel | ReceivedUserModel[],
+  code?: number
+): FullMessage => {
   const status = code || 200;
   return { msg, data, status };
 };

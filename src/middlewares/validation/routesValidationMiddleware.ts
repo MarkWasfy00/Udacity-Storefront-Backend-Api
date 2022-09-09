@@ -40,7 +40,7 @@ export const emailPasswordRules = [
 ];
 
 export const idUserRulesOnBody = [
-  param("id").exists().withMessage("are not found").isNumeric().withMessage("must be a number"),
+  body("id").exists().withMessage("are not found").isNumeric().withMessage("must be a number"),
 ];
 
 export const idUserRulesOnParams = [

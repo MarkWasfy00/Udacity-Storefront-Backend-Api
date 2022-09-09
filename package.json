@@ -4,7 +4,18 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "dev": "nodemon --exec ts-node src/index.ts"
+    "dev": "nodemon --exec ts-node src/index.ts",
+
+    "db:reset": "npx db-migrate reset",
+    "db:up": "npx db-migrate up",
+    "db:down": "npx db-migrate down",
+
+    "build": "npx tsc",
+    "test": "npm run build && npm run db:up && jasmine",
+
+    "format": "prettier --write 'src/**/*.ts'",
+    "lint": "eslint ./src",
+    "lint:fix": "eslint ./src --fix"
   },
   "keywords": [],
   "author": "",
@@ -23,6 +34,7 @@
     "@types/jsonwebtoken": "^8.5.9",
     "@types/node": "^18.7.15",
     "@types/pg": "^8.6.5",
+    "@types/supertest": "^2.0.12",
     "@typescript-eslint/eslint-plugin": "^5.36.2",
     "@typescript-eslint/parser": "^5.36.2",
     "copyfiles": "^2.4.1",

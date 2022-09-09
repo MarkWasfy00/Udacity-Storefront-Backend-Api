@@ -1,4 +1,4 @@
-import { UserModel } from "../../models/types/UserModel";
+import { ReceivedUserModel, UserModel } from "../../models/types/UserModel";
 
 export type ReturnMessage = {
   // can be success message or error message
@@ -8,7 +8,7 @@ export type ReturnMessage = {
 
 export type DataMessage = {
   // success message with data
-  data: UserModel | UserModel[];
+  data: ReceivedUserModel | ReceivedUserModel[];
 };
 
 export type FullMessage = ReturnMessage & DataMessage;

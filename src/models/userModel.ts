@@ -1,6 +1,6 @@
 import { db } from "../database/database";
 import { hashThisPassword } from "../functions/passwordHash";
-import { errorHandler, successHandler, successWithData } from "../functions/responseHandler";
+import { errorHandler, successWithData } from "../functions/responseHandler";
 import bcrypt from "bcrypt";
 
 // types
@@ -9,14 +9,14 @@ import { UserModel } from "./types/UserModel";
 
 class User {
   // create user
-  async create(user: UserModel): Promise<ReturnMessage> {
+  async create(user: UserModel): Promise<FullMessage | ReturnMessage> {
     try {
       const connection = await db.connect();
       const data = [user.email, user.name, user.age, hashThisPassword(user.password)];
-      const query = `INSERT INTO users (email, name, age, password) values ($1, $2, $3, $4) returning name`;
+      const query = `INSERT INTO users (email, name, age, password) values ($1, $2, $3, $4) returning id, email, name, age`;
       const response = await connection.query(query, data);
       connection.release();
-      return successHandler(`success created User: ${response.rows[0].name}`);
+      return successWithData("Success Created User", response.rows[0]);
     } catch (err) {
       return errorHandler((err as Error).message);
     }
@@ -54,10 +54,10 @@ class User {
     try {
       const connection = await db.connect();
       const data = [user.email, user.name, user.age, hashThisPassword(user.password), user.id];
-      const query = `UPDATE users SET email=$1, name=$2, age=$3, password=$4 WHERE id=$5 returning name`;
+      const query = `UPDATE users SET email=$1, name=$2, age=$3, password=$4 WHERE id=$5 returning id, email, name, age`;
       const response = await connection.query(query, data);
       connection.release();
-      return successHandler(`User Updated: ${response.rows[0].name}`);
+      return successWithData("User Updated", response.rows[0]);
     } catch (err) {
       return errorHandler((err as Error).message);
     }
@@ -69,9 +69,9 @@ class User {
       const query = "SELECT name FROM users WHERE id=$1";
       const response = await connection.query(query, [id]);
       if (response.rowCount) {
-        const userInfo = await connection.query("DELETE FROM users WHERE id=$1 returning name", [id]);
+        const userInfo = await connection.query("DELETE FROM users WHERE id=$1 returning id, email, name, age", [id]);
         connection.release();
-        return successHandler(`User Deleted: ${userInfo.rows[0].name}`);
+        return successWithData("User Deleted", userInfo.rows[0]);
       } else {
         connection.release();
         return errorHandler("User not exist");

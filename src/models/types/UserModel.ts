@@ -5,3 +5,10 @@ export type UserModel = {
   age: number;
   password: string;
 };
+
+export type ReceivedUserModel = {
+  id: number;
+  email: string;
+  name: string;
+  age: number;
+};

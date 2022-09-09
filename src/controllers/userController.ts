@@ -7,7 +7,7 @@ import User from "../models/userModel";
 const USER = new User();
 
 export const createUser = async (req: Request, res: Response): Promise<void> => {
-  const result: ReturnMessage = await USER.create(req.body);
+  const result: FullMessage | ReturnMessage = await USER.create(req.body);
   res.status(result.status).json(result);
 };
 
@@ -32,7 +32,7 @@ export const deleteUser = async (req: Request, res: Response): Promise<void> => 
 };
 
 export const authUser = async (req: Request, res: Response): Promise<void> => {
-  const result = await USER.auth(req.body.email, req.body.password);
+  const result: FullMessage | ReturnMessage = await USER.auth(req.body.email, req.body.password);
   if ("data" in result) {
     const userToken = jwt.sign(result.data, securityConfig.JWT_TOKEN as unknown as string);
     res.status(result.status).json({ ...result, userToken });
