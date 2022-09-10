@@ -5,14 +5,14 @@
   "main": "index.js",
   "scripts": {
     "dev": "nodemon --exec ts-node src/index.ts",
-
     "db:reset": "npx db-migrate reset",
+    "db:hardreset": "npx db-migrate down && npx db-migrate up",
     "db:up": "npx db-migrate up",
     "db:down": "npx db-migrate down",
-
+    "cp:env": "copyfile -a ./fest ./test",
     "build": "npx tsc",
-    "test": "npm run build && npm run db:up && jasmine",
-
+    "test": "npm run build && npm run cp:env && npm run db:up && jasmine && npm run db:hardreset",
+    "preview": "node dist/.",
     "format": "prettier --write 'src/**/*.ts'",
     "lint": "eslint ./src",
     "lint:fix": "eslint ./src --fix"
