@@ -1,4 +1,4 @@
-import { ReceivedUserModel, UserModel } from "../../models/types/UserModel";
+import { ReceivedUserModel } from "../../models/types/UserModel";
 
 export type ReturnMessage = {
   // can be success message or error message

@@ -1,4 +1,4 @@
-import { ReceivedUserModel, UserModel } from "../models/types/UserModel";
+import { ReceivedUserModel } from "../models/types/UserModel";
 import { FullMessage, ReturnMessage } from "./types/ResponseHandler";
 
 export const errorHandler = (msg: string, code?: number): ReturnMessage => {

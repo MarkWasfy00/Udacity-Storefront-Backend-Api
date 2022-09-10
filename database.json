@@ -1,6 +1,6 @@
 {
-    "deafultEnv": "dev",
-    "dev": {
+  "defaultEnv": "local",
+    "local": {
       "driver": "pg",
       "host": { "ENV": "PGHOST" },
       "port": { "ENV": "PGPORT" },

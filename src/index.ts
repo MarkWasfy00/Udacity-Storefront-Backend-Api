@@ -7,7 +7,7 @@ app.use(express.json()); // used to decode the incoming requests
 
 // this is the main endpoint for the application that holds api application 🔹
 app.get("/", (req: Request, res: Response) => {
-  res.send("hello world");
+  res.send("welcome to storefront-api");
 });
 
 // All routers here 🔹

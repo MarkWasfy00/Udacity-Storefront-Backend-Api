@@ -2,7 +2,7 @@ import { Request, Response, NextFunction } from "express";
 import securityConfig from "../../config/env/security.config";
 import jwt from "jsonwebtoken";
 
-export const authorization = (req: Request, res: Response, next: NextFunction) => {
+export const authorization = (req: Request, res: Response, next: NextFunction): void => {
   try {
     const authHeader = req.headers.authorization;
     if (authHeader) {
