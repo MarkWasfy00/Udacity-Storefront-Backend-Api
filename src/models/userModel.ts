@@ -6,6 +6,7 @@ import bcrypt from "bcrypt";
 // types
 import { FullMessage, ReturnMessage } from "../functions/types/ResponseHandler";
 import { UserModel } from "./types/UserModel";
+import securityConfig from "../config/env/security.config";
 
 class User {
   // create user
@@ -89,12 +90,13 @@ class User {
       const response = await connection.query(query, data);
       if (response.rows.length) {
         const userPassword = response.rows[0].password;
-        const validPassword = bcrypt.compareSync(password, userPassword);
+        const validPassword = bcrypt.compareSync(password + securityConfig.PEPPER, userPassword);
         if (validPassword) {
           const userInfo = await connection.query(`SELECT id, name, email, age from users WHERE email=$1`, data);
           connection.release();
           return successWithData(`User Authorized`, userInfo.rows[0]);
         } else {
+          connection.release();
           return errorHandler(`Wrong password`);
         }
       } else {

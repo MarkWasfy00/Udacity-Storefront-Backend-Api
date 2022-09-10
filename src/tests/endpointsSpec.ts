@@ -23,7 +23,7 @@ describe("Testing register/login endpoints", () => {
       .send({ email: "test@jasmin.com", password: "jasmine123" });
     expect(res.status).toBe(200);
     token = `${res.body.userToken}`;
-    currentId = res.body.data.id;
+    currentId = await res.body.data.id;
   });
 });
 
