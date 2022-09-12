@@ -1,14 +1,7 @@
 export type UserModel = {
-  id: number;
+  id?: number;
   email: string;
-  name: string;
-  age: number;
+  firstname: string;
+  lastname: string;
   password: string;
-};
-
-export type ReceivedUserModel = {
-  id: number;
-  email: string;
-  name: string;
-  age: number;
 };

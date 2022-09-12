@@ -13,8 +13,8 @@ class User {
   async create(user: UserModel): Promise<FullMessage | ReturnMessage> {
     try {
       const connection = await db.connect();
-      const data = [user.email, user.name, user.age, hashThisPassword(user.password)];
-      const query = `INSERT INTO users (email, name, age, password) values ($1, $2, $3, $4) returning id, email, name, age`;
+      const data = [user.email, user.firstname, user.lastname, hashThisPassword(user.password)];
+      const query = `INSERT INTO users (email, firstname, lastname, password) values ($1, $2, $3, $4) returning id, email, firstname, lastname`;
       const response = await connection.query(query, data);
       connection.release();
       return successWithData("Success Created User", response.rows[0]);
@@ -26,7 +26,7 @@ class User {
   async index(): Promise<FullMessage | ReturnMessage> {
     try {
       const connection = await db.connect();
-      const query = "SELECT id, email, name, age from users";
+      const query = "SELECT id, email, firstname, lastname from users";
       const response = await connection.query(query);
       connection.release();
       return successWithData("Users Fetched", response.rows);
@@ -38,7 +38,7 @@ class User {
   async show(id: number): Promise<FullMessage | ReturnMessage> {
     try {
       const connection = await db.connect();
-      const query = `SELECT id, email, name, age FROM users WHERE id=($1)`;
+      const query = `SELECT id, email, firstname, lastname FROM users WHERE id=($1)`;
       const response = await connection.query(query, [id]);
       connection.release();
       if (response.rowCount) {
@@ -51,11 +51,11 @@ class User {
     }
   }
   // update specific user
-  async update(user: UserModel): Promise<FullMessage | ReturnMessage> {
+  async update(id: number, user: UserModel): Promise<FullMessage | ReturnMessage> {
     try {
       const connection = await db.connect();
-      const data = [user.email, user.name, user.age, hashThisPassword(user.password), user.id];
-      const query = `UPDATE users SET email=$1, name=$2, age=$3, password=$4 WHERE id=$5 returning id, email, name, age`;
+      const data = [user.email, user.firstname, user.lastname, hashThisPassword(user.password), id];
+      const query = `UPDATE users SET email=$1, firstname=$2, lastname=$3, password=$4 WHERE id=$5 returning id, email, firstname, lastname`;
       const response = await connection.query(query, data);
       connection.release();
       return successWithData("User Updated", response.rows[0]);
@@ -70,7 +70,10 @@ class User {
       const query = "SELECT name FROM users WHERE id=$1";
       const response = await connection.query(query, [id]);
       if (response.rowCount) {
-        const userInfo = await connection.query("DELETE FROM users WHERE id=$1 returning id, email, name, age", [id]);
+        const userInfo = await connection.query(
+          "DELETE FROM users WHERE id=$1 returning id, email, firstname, lastname",
+          [id]
+        );
         connection.release();
         return successWithData("User Deleted", userInfo.rows[0]);
       } else {
@@ -86,22 +89,25 @@ class User {
     try {
       const connection = await db.connect();
       const data = [email];
-      const query = `SELECT password FROM users WHERE email=$1`;
+      const query = "SELECT password FROM users WHERE email=$1";
       const response = await connection.query(query, data);
       if (response.rows.length) {
         const userPassword = response.rows[0].password;
         const validPassword = bcrypt.compareSync(password + securityConfig.PEPPER, userPassword);
         if (validPassword) {
-          const userInfo = await connection.query(`SELECT id, name, email, age from users WHERE email=$1`, data);
+          const userInfo = await connection.query(
+            "SELECT id, email, firstname, lastname from users WHERE email=$1",
+            data
+          );
           connection.release();
-          return successWithData(`User Authorized`, userInfo.rows[0]);
+          return successWithData("User Authorized", userInfo.rows[0]);
         } else {
           connection.release();
-          return errorHandler(`Wrong password`);
+          return errorHandler("Wrong password");
         }
       } else {
         connection.release();
-        return errorHandler(`Email not exist`);
+        return errorHandler("Email not exist");
       }
     } catch (err) {
       return errorHandler((err as Error).message);
