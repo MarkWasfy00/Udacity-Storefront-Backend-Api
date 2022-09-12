@@ -5,7 +5,7 @@ import Order from "../models/orderModel";
 const ORDER = new Order();
 
 export const createOrder = async (req: Request, res: Response): Promise<void> => {
-  const result: FullMessage | ReturnMessage = await ORDER.create(2, false);
+  const result: FullMessage | ReturnMessage = await ORDER.create(req.body.user_id, req.body.is_complete);
   res.status(result.status).json(result);
 };
 
@@ -35,5 +35,10 @@ export const addProduct = async (req: Request, res: Response): Promise<void> => 
     req.body.productId,
     req.body.quantity
   );
+  res.status(result.status).json(result);
+};
+
+export const orderDetails = async (req: Request, res: Response): Promise<void> => {
+  const result: FullMessage | ReturnMessage = await ORDER.orderDetails(req.params.id as unknown as number);
   res.status(result.status).json(result);
 };
