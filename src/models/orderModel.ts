@@ -39,7 +39,7 @@ class Order {
       const query = "INSERT INTO orders (user_id, is_complete) VALUES ($1, $2) RETURNING *";
       const response = await connection.query(query, [id, status]);
       connection.release();
-      return successWithData("Order created", response.rows);
+      return successWithData("Order created", response.rows[0]);
     } catch (err) {
       return errorHandler((err as Error).message);
     }
@@ -77,7 +77,7 @@ class Order {
     }
   }
 
-  async addProduct(orderId: string, productId: string, quantity: number): Promise<FullMessage | ReturnMessage> {
+  async addProduct(orderId: number, productId: number, quantity: number): Promise<FullMessage | ReturnMessage> {
     try {
       const connection = await db.connect();
       const query = "SELECT * FROM orders WHERE id=$1";

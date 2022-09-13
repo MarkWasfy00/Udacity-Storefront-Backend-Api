@@ -20,7 +20,7 @@ class Product {
   async create(product: ProductModel): Promise<FullMessage | ReturnMessage> {
     try {
       const connection = await db.connect();
-      const query = "INSERT INTO products (name, price) VALUES($1, $2) RETURNING name, price";
+      const query = "INSERT INTO products (name, price) VALUES($1, $2) RETURNING id, name, price";
       const response = await connection.query(query, [product.name, product.price]);
       connection.release();
       return successWithData("Product added", response.rows[0]);

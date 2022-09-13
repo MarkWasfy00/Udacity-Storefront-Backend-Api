@@ -67,7 +67,7 @@ class User {
   async destroy(id: number): Promise<FullMessage | ReturnMessage> {
     try {
       const connection = await db.connect();
-      const query = "SELECT name FROM users WHERE id=$1";
+      const query = "SELECT firstname FROM users WHERE id=$1";
       const response = await connection.query(query, [id]);
       if (response.rowCount) {
         const userInfo = await connection.query(

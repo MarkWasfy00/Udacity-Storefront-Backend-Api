@@ -31,7 +31,7 @@ export const deleteOrder = async (req: Request, res: Response): Promise<void> =>
 
 export const addProduct = async (req: Request, res: Response): Promise<void> => {
   const result: FullMessage | ReturnMessage = await ORDER.addProduct(
-    req.params.id,
+    req.params.id as unknown as number,
     req.body.productId,
     req.body.quantity
   );

@@ -40,7 +40,6 @@ export const orderRules = [
 ];
 
 export const orderProductRules = [
-  body("orderId").exists().withMessage("are not found").isNumeric().withMessage("must be a number"),
   body("productId").exists().withMessage("are not found").isNumeric().withMessage("must be a number"),
   body("quantity").exists().withMessage("are not found").isNumeric().withMessage("must be a number"),
 ];
