@@ -24,7 +24,6 @@
   "dependencies": {
     "bcrypt": "^5.0.1",
     "express": "^4.18.1",
-    "express-validator": "^6.14.2",
     "jsonwebtoken": "^8.5.1",
     "pg": "^8.8.0"
   },
@@ -38,6 +37,7 @@
     "@types/supertest": "^2.0.12",
     "@typescript-eslint/eslint-plugin": "^5.36.2",
     "@typescript-eslint/parser": "^5.36.2",
+    "express-validator": "^6.14.2",
     "cli-color": "^2.0.3",
     "copyfiles": "^2.4.1",
     "db-migrate": "^0.11.13",
