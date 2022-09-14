@@ -9,44 +9,43 @@
 ## Routes post data
 
 ### User routes (post routes)
-`localhost:3000/api/users` -> needs 
+`localhost:3000/api/users` -> `POST` -> needs 
 - email -> string;
 - firstname -> string;
 - lastname -> string;
 - password -> string;
 
-`localhost:3000/api/users/:id/update` -> needs
+`localhost:3000/api/users/:id` -> `PUT` -> needs
 - email -> string;
 - firstname -> string;
 - lastname -> string;
 - password -> string;
 
-`localhost:3000/api/users/:id/delete` -> doesn't need any post data
+`localhost:3000/api/users/:id` -> `DELETE` -> doesn't need any post data
 
 
-### Product routes (post routes)
-`localhost:3000/api/products` -> needs
+### Product routes (post & put routes)
+`localhost:3000/api/products` -> `POST` -> needs
 - name -> string
 - price -> number / decimal (max 2 numbers after .)
 
-`localhost:3000/api/products/:id/update` -> needs
+`localhost:3000/api/products/:id` -> `PUT` -> needs
 - name -> string
 - price -> number / decimal (max 2 numbers after .)
 
-`localhost:3000/api/products/:id/delete` -> doesn't need any post data
-
+`localhost:3000/api/products/:id` -> `DELETE` -> doesn't need any data
 
 ### Order routes (post routes)
-`localhost:3000/api/orders` -> needs
+`localhost:3000/api/orders` -> `POST` -> needs
 - user_id -> number
 - is_complete -> boolean
 
-`localhost:3000/api/orders/:id/products` -> needs
+`localhost:3000/api/orders/:id/products` -> `POST` -> needs
 - productId -> number
 - quantity -> number
 
-`localhost:3000/api/orders/:id/update` -> needs
+`localhost:3000/api/orders/:id` -> `PUT` -> needs
 - user_id -> number
 - is_complete -> boolean
 
-`localhost:3000/api/orders/:id/delete` -> doesn't need any post data
+`localhost:3000/api/orders/:id/delete` -> `DELETE` -> doesn't need any data

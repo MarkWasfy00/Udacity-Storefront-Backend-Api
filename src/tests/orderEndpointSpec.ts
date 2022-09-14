@@ -59,7 +59,7 @@ describe("Testing order routes endpoints", () => {
 
   it("Test update order route with auth", async () => {
     await request
-      .post(`/api/orders/${order.id}/update`)
+      .put(`/api/orders/${order.id}`)
       .set("Authorization", `Bearer ${token}`)
       .set("Content-Type", "application/json")
       .set("Accept", "application/json")
@@ -87,6 +87,6 @@ describe("Testing order routes endpoints", () => {
   });
 
   it("Test delete order route with auth", async () => {
-    await request.post(`/api/orders/${order.id}/delete`).set("Authorization", `Bearer ${token}`).expect(200);
+    await request.delete(`/api/orders/${order.id}`).set("Authorization", `Bearer ${token}`).expect(200);
   });
 });

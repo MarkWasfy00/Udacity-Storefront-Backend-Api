@@ -45,7 +45,7 @@ describe("Testing product routes endpoints", () => {
 
   it("Test update product route with auth", async () => {
     await request
-      .post(`/api/products/${product.id}/update`)
+      .put(`/api/products/${product.id}`)
       .set("Authorization", `Bearer ${token}`)
       .set("Content-Type", "application/json")
       .set("Accept", "application/json")
@@ -54,6 +54,6 @@ describe("Testing product routes endpoints", () => {
   });
 
   it("Test delete product route with auth", async () => {
-    await request.post(`/api/products/${product.id}/delete`).set("Authorization", `Bearer ${token}`).expect(200);
+    await request.delete(`/api/products/${product.id}`).set("Authorization", `Bearer ${token}`).expect(200);
   });
 });

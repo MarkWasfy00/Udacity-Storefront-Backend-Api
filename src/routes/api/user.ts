@@ -10,5 +10,5 @@ export const userRouter = express.Router();
 userRouter.get("/", auth, getUsers);
 userRouter.get("/:id", idRules, validate, auth, showUser);
 
-userRouter.post("/:id/update", idRules, userRules, validate, auth, updateUser);
-userRouter.post("/:id/delete", idRules, validate, auth, deleteUser);
+userRouter.put("/:id", idRules, userRules, validate, auth, updateUser);
+userRouter.delete("/:id", idRules, validate, auth, deleteUser);

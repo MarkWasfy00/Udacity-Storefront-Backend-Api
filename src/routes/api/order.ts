@@ -19,6 +19,6 @@ orderRouter.get("/:id", idRules, validate, auth, showOrder);
 orderRouter.get("/:id/products", idRules, validate, auth, orderDetails);
 
 orderRouter.post("/", orderRules, validate, auth, createOrder);
-orderRouter.post("/:id/update", idRules, validate, auth, updateOrder);
-orderRouter.post("/:id/delete", idRules, validate, auth, deleteOrder);
 orderRouter.post("/:id/products", idRules, orderProductRules, validate, auth, addProduct);
+orderRouter.put("/:id", idRules, validate, auth, updateOrder);
+orderRouter.delete("/:id", idRules, validate, auth, deleteOrder);

@@ -16,5 +16,5 @@ productRouter.get("/", auth, getProducts);
 productRouter.get("/:id", idRules, validate, auth, showProduct);
 
 productRouter.post("/", productRules, validate, auth, createProduct);
-productRouter.post("/:id/update", idRules, validate, auth, updateProduct);
-productRouter.post("/:id/delete", idRules, validate, auth, deleteProduct);
+productRouter.put("/:id", idRules, validate, auth, updateProduct);
+productRouter.delete("/:id", idRules, validate, auth, deleteProduct);

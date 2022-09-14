@@ -9,16 +9,16 @@
 - localhost:3000/api/users/:id -> `GET` -> must be logged in `token needed` -- get specific user
   
 - localhost:3000/api/users -> `POST` -> must be logged in `token needed` -- creates user
-- localhost:3000/api/users/:id/update -> `POST` -> must be logged in `token needed` -- update user
-- localhost:3000/api/users/:id/delete -> `POST` -> must be logged in `token needed` -- delete user
+- localhost:3000/api/users/:id -> `PUT` -> must be logged in `token needed` -- update user
+- localhost:3000/api/users/:id -> `DELETE` -> must be logged in `token needed` -- delete user
 
 ## Product Routes
 - localhost:3000/api/products -> `GET` -> must be logged in `token needed` -- get all products
 - localhost:3000/api/products/:id -> `GET` -> must be logged in `token needed` -- get specific product
   
 - localhost:3000/api/products -> `POST` -> must be logged in `token needed` -- creates product
-- localhost:3000/api/products/:id/update -> `POST` -> must be logged in `token needed` -- update product
-- localhost:3000/api/products/:id/delete -> `POST` -> must be logged in `token needed` -- delete product
+- localhost:3000/api/products/:id -> `PUT` -> must be logged in `token needed` -- update product
+- localhost:3000/api/products/:id -> `DELETE` -> must be logged in `token needed` -- delete product
 
 ## Order Routes
 - localhost:3000/api/orders -> `GET` -> must be logged in `token needed` -- get all orders
@@ -27,8 +27,8 @@
   
 - localhost:3000/api/orders -> `POST` -> must be logged in `token needed` -- creates order
 - localhost:3000/api/orders/:id/products -> `POST` -> must be logged in `token needed` -- add product to the order
-- localhost:3000/api/orders/:id/update -> `POST` -> must be logged in `token needed` -- update order
-- localhost:3000/api/orders/:id/delete -> `POST` -> must be logged in `token needed` -- delete order
+- localhost:3000/api/orders/:id -> `PUT` -> must be logged in `token needed` -- update order
+- localhost:3000/api/orders/:id -> `DELETE` -> must be logged in `token needed` -- delete order
 
 # Database schema 
 
