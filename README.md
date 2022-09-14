@@ -1,6 +1,7 @@
 ## how to setup and connect to the database 📌
 - open config folder and open .env.example
 - replace variables with yours
+- npm install
 - npm run test (to build your project and tests)
 - thats it 🪄 you are ready to go
 
