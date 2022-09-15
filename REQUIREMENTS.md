@@ -26,9 +26,9 @@
 - localhost:3000/api/orders/:id/products -> `GET` -> must be logged in `token needed` -- get order details
   
 - localhost:3000/api/orders -> `POST` -> must be logged in `token needed` -- creates order
-- localhost:3000/api/orders/:id/products -> `POST` -> must be logged in `token needed` -- add product to the order
-- localhost:3000/api/orders/:id -> `PUT` -> must be logged in `token needed` -- update order
-- localhost:3000/api/orders/:id -> `DELETE` -> must be logged in `token needed` -- delete order
+- localhost:3000/api/orders/:id/products -> `POST` -> -- add product to the order
+- localhost:3000/api/orders/:id -> `PUT` -> -- update order
+- localhost:3000/api/orders/:id -> `DELETE` -> -- delete order
 
 # Database schema 
 

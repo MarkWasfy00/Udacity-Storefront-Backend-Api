@@ -1,20 +1,26 @@
+### how to setup and connect to the database in PSQL terminal 📌
+`bash
+    CREATE DATABASE storefront_db;
+    CREATE DATABASE test_db;
+`
+
 ### setup env variables 📌
 - open config folder and open .env.example
   
-NODE_ENV = {PUT_YOUR_ENV} => example : `dev` or `test`
+- NODE_ENV = {PUT_YOUR_ENV} => example : `dev` or `test`
 
-PGHOST= `{PUT_DATABASE_HOST}`
-PGPORT= `{PUT_DATABASE_PORT}`
-PGUSER= `{PUT_DATABASE_USERNAME}`
-PGPASSWORD= `{PUT_DATABASE_PASSWORD}`
-PGDATABASE= `{PUT_DATABASE_NAME}`
+- PGHOST= `{PUT_DATABASE_HOST}`
+- PGPORT= `{PUT_DATABASE_PORT}`
+- PGUSER= `{PUT_DATABASE_USERNAME}`
+- PGPASSWORD= `{PUT_DATABASE_PASSWORD}`
+- PGDATABASE= `{PUT_DATABASE_NAME}`
 
-PGTEST= `{PUT_DATABASE_TEST_NAME}`
+- PGTEST= `{PUT_DATABASE_TEST_NAME}`
 
-JWT_TOKEN= `{PUT_YOUR_JWT_TOKEN}`
-PEPPER= `{PUT_YOUR_PEPPER_TO_BE_ADDED_TO_PASSWORD}`
+- JWT_TOKEN= `{PUT_YOUR_JWT_TOKEN}`
+- PEPPER= `{PUT_YOUR_PEPPER_TO_BE_ADDED_TO_PASSWORD}`
 
-## how to setup and connect to the database 📌
+## how to start your project 📌
 - open config folder and open .env.example
 - replace variables with yours
 - npm install
