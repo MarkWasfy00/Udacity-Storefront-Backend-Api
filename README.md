@@ -1,3 +1,15 @@
+### setup env variables 📌
+- open config folder and open .env.example
+  
+PGHOST= `{PUT_DATABASE_HOST}`
+PGPORT= `{PUT_DATABASE_PORT}`
+PGUSER= `{PUT_DATABASE_USERNAME}`
+PGPASSWORD= `{PUT_DATABASE_PASSWORD}`
+PGDATABASE= `{PUT_DATABASE_NAME}`
+
+JWT_TOKEN= `{PUT_YOUR_JWT_TOKEN}`
+PEPPER= `{PUT_YOUR_PEPPER_TO_BE_ADDED_TO_PASSWORD}`
+
 ## how to setup and connect to the database 📌
 - open config folder and open .env.example
 - replace variables with yours
@@ -6,7 +18,7 @@
 - thats it 🪄 you are ready to go
 
 
-## Routes post data
+## Routes post data 📌
 
 ### User routes (post routes)
 `localhost:3000/api/users` -> `POST` -> needs 
