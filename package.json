@@ -4,16 +4,18 @@
   "description": "",
   "main": "index.js",
   "scripts": {
+    "build": "npx tsc",
+
     "dev": "nodemon --exec ts-node src/index.ts",
+    "start": "npm run build && node dist/.",
+    
     "db:up": "db-migrate up --all",
     "db:reset": "npx db-migrate reset",
-    "db:hardreset": "db-migrate reset && db-migrate up --all",
     "cp:env": "node config/setup.js",
 
-    "build": "npx tsc",
-    "test": "npm run build && npm run cp:env && npm run db:up && jasmine && npm run db:hardreset && node config/finished.js ",
-    "preview": "node dist/.",
-
+    "test": "npm run cp:env && export NODE_ENV=test&& npm run build && npm run db:up && jasmine && npm run db:reset && node config/finished.js ",
+    "test:windows": "npm run cp:env && set NODE_ENV=test&& npm run build && npm run db:up && jasmine && npm run db:reset && node config/finished.js ",
+    
     "format": "prettier --write 'src/**/*.ts'",
     "lint": "eslint ./src",
     "lint:fix": "eslint ./src --fix"
