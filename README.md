@@ -1,8 +1,8 @@
 ### how to setup and connect to the database in PSQL terminal 📌
-`bash
+```bash
     CREATE DATABASE storefront_db;
     CREATE DATABASE test_db;
-`
+```
 
 ### setup env variables 📌
 - open config folder and open .env.example
